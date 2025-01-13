@@ -7,7 +7,7 @@ landed Apollo 11 on the moon.
 #### The Transistor
 - Semiconductor device
 - Used to amplify or 'switch' electronic signals
-  - Does this through voltage and current controler
+  - Does this through voltage and current controller
 - Building block for digital logic, RAM, and processors.
 - At one point, this is what we had
 
@@ -31,8 +31,7 @@ of the processor.
   attempt to run it on a different processor, it won't work.
 
 #### Reduced Instruction Set Computer (RISC) Architectures (1980s)
-- Idea: We can represent each task of the computer using a
-subset of a simplified set of instructions
+- Idea: We can represent each task of the computer using a subset of a simplified set of instructions
   - Performance is salvaged by capitalizing on simplicity,
   and build our architectures to execute them as
   fast as possible
