@@ -66,3 +66,12 @@ The sum of the first \( n \) terms is:
 $$
 S_n = \sum_{n=1}^{N} a_n
 $$
+
+
+\[
+O(n), \quad \Omega(n), \quad \Theta(n), \quad \infty
+\]
+
+\[
+a + b = c \quad \text{and} \quad x + y = z
+\]
