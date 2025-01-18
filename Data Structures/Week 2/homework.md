@@ -1,3 +1,7 @@
+##### By Pablo Valdes; 1/17/25
+
+---
+
 ![](./Homework/p1.png)
 
 ---
@@ -79,3 +83,139 @@ Which can be simplified to,
 ![](./Homework/p2.png)
 
 ---
+
+``` java
+static int[] shiftValues(int[] arr, int lastNegativeIndex, int currentIndex) {
+	    if (currentIndex == arr.length) {
+	        return arr;
+	    }
+	    
+	    if (arr[currentIndex] < 0) {
+	        
+	        int negativeValue = arr[currentIndex];
+	        
+	        for (int i = currentIndex; i > lastNegativeIndex; i--) {
+	            arr[i] = arr[i-1];
+	        }
+	        
+	        arr[lastNegativeIndex] = negativeValue;
+	        
+	        shiftValues(arr, lastNegativeIndex+1, currentIndex+1);
+	        
+	    } else {
+
+	        shiftValues(arr, lastNegativeIndex, currentIndex+1);
+	    }
+	    return arr;
+    }
+```
+
+---
+
+In our recursive Java code solution, we have some constant operations,
+our base case and if statement both check values, these run in constant
+time, assigning our negative value to our array index is also constant,
+as is our other assignment, these are all constant and for now can
+be ignored for the time complexity analysis
+
+Our recursive algorithm is really running a linear call stack to achieve
+\(O(n)\), time complexity, the area of interest however is our for loop,
+this for loop is swapping positive values to the right, which overwrite
+the encountered negative value there, this creates space to insert the
+negative value where a positive once was, this operation can vary based
+on the space between where we want to create an opening on the left for
+a negative and where the negative we just encountered is, there is a given
+amount of variables between those two spaces, that must be swapped through to
+the right to create our desired opening on the left, our bottleneck here is
+essentially our **distance** between the negative placement on the left, and
+the positive numbers we must shift to the right in order to free that placement
+for the negative number encountered
+
+It's important to note that we have two branches of recursion here, one where we
+encounter a negative value, and must perform our for loop to make space to add it
+on the left, and the other where we encounter a positive number and just continue, 
+the second is of constant time, the second, we can represent with sum notation
+
+``` java
+for (int i = currentIndex; i > lastNegativeIndex; i--) {
+	arr[i] = arr[i-1];
+}
+```
+
+*__*last negative index*__ is a placeholder for where the next negative should
+be placed, whereas __*current index*__ is in this case, where a negative number
+has been encountered*
+
+\[
+\sum^{currentIndex}_{i = lastNegativeIndex + 1}
+\]
+
+For simplicity, let's just call this distance, \(d_j\), \(_j\) being the current negative
+element position being processed and \(d\) being the distance,
+
+\(d_j\) = \(currentIndex - lastNegativeDistance\)
+\(d_j\) = \(k - j\)
+
+It's also important to note that the cost of shifting across the distance
+does not exceed n; the total costs of shifting:
+
+*__*k*__ is the currently encountered negative, we want to shift the
+positives towards the __*j*__ index fill it's position, so we have an
+opening at j to put our encountered negative on the left*
+
+\[
+Shifting Cost = \sum^{k}_{j=1}d_j<=n
+\]
+
+To model the full complexity of our algorithm, we will take into account both
+cases of the recursion, which can be modeled with the recurrence relation,
+
+\[
+T(n) = 
+\begin{cases} 
+      O(1) & \text{if } n = 0 \\
+      T(n-1)+d_j & \text{if } arr[n] \text{ is negative} \\
+      T(n-1) + O(1) & \text{if } arr[n] \text{ is positive}
+\end{cases}
+\]
+
+Which we can simplify this to,
+\[
+T(n) = T(n-1) + O(1) + O(d_j)
+\]
+
+We can prove our overall time complexity with a summation of the
+entire function and it's recursive parts, for the entire processing
+of the function, it's,
+
+\[
+\sum^{n}_{i=1}O(1)
+\]
+
+and with the total cost of shifting as previously stated, the total time
+complexity is,
+
+\[
+T(n)=\sum^{n}_{i=1}O(1)\sum^{k}_{j=1}O(d_j)
+\]
+
+Which when evaluated is,
+
+\[
+\sum^{k}_{j=1}O(d_j)<=O(n)
+\]
+\[
+\sum^{n}_{i=1}O(1)=n*O(1)=O(n)
+\]
+
+Therefore,
+
+\[
+T(n) = O(n) + O(n)
+\]
+\[
+T(n) = O(2n)
+\]
+\[
+\implies O(n)
+\]
