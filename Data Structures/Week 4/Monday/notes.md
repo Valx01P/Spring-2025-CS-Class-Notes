@@ -203,7 +203,10 @@ public class main {
 (9 + 3h + 3h + h^2)(3+h)
 27 + 9h + 6h + 3h^2 + 6h + 3h^2 + 3h^2 + h^3
 
-h^3 + 9h^2 + 21h + 27
+h^3 + 9h^2 + 21h + 27 - 27
 
+h^3 + 9h^2 + 21h
 
-'hey can i talk with you'
+h(h^2 + 9h + 21)
+
+h^2 + 9h + 21
