@@ -18,3 +18,4 @@
 
 The height, h, is important because it determines the time
 complexity of many tree operations (insert, delete, etc.)
+
